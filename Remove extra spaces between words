@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    string s;
+    getline(cin, s);
+    vector <string> res(1, "");
+    for (char c : s){
+        if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')){
+            if (c >= 'a' && c <= 'z' && res[res.size() - 1] == ""){
+                res[res.size() - 1].push_back((char)(c -'a' +'A'));
+            } else if (c >= 'A' && c <= 'Z'){
+                res[res.size() - 1].push_back((char)(c -'A' +'a'));
+            } else if (c >= 'a' && c <= 'z'){
+                res[res.size() - 1].push_back(c);
+            }
+        }
+        else {
+            res.push_back("");
+            res[res.size() - 1].push_back(c);
+            res.push_back("");
+        }
+    }
+
+    for (int i = 0; i < res.size(); ++i){
+        cout << res[i];
+    }
+
+
+    return 0;
+}
