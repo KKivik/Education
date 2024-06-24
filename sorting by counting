@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void fillTheArray(vector <int>& arr) 
+{
+    for (int i = 0; i < arr.size(); ++i) {
+        arr[i] = rand() % 100;
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+void sortCount(vector <int>& arr) {
+    vector <int> cnt(100);
+    for (int i = 0; i < arr.size(); ++i) {
+        cnt[arr[i]] += 1;
+        //cout << cnt[arr[i]] << " " << arr[i] << endl;
+    }
+    int ind = 0;
+    for (int i = 0; i < cnt.size(); ++i) {
+        while (cnt[i] != 0) {
+            arr[ind] = i;
+            ind++;
+            cnt[i]--;
+        }
+    }
+    
+}
+
+
+int main()
+{
+    cout << "Enter the length of array: " << endl;
+    int n;
+    cin >> n;
+    vector <int> arr(n);
+    fillTheArray(arr);
+    sortCount(arr);
+
+    for (int i = 0; i < arr.size(); ++i) {
+        cout << arr[i] << " ";
+    }
+
+}
