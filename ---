@@ -1,0 +1,94 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void fillTheArray(vector <int>& arr) 
+{
+    for (int i = 0; i < arr.size(); ++i) {
+        arr[i] = rand() % 100;
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+int partition(vector <int>& arr, int l, int r) {
+    int p = (r + l) / 2;
+    int i = l - 1, j = r + 1;
+    while (true)
+    {
+        do i++;
+        while (arr[i] < arr[p]);
+        do j--;
+        while (arr[j] > arr[p]);
+
+        if (i >= j) return j;
+        swap(arr[i], arr[j]);
+    }
+}
+
+//void sortCount(vector <int>& arr) {
+//    int maxx = arr[0], minn = arr[0];
+//    for (int i = 0; i < arr.size(); ++i) {
+//        if (arr[i] > maxx) {
+//            maxx = arr[i];
+//        }
+//        else if (arr[i] < minn) {
+//            minn = arr[i];
+//        }
+//        
+//    }
+//    vector <int> cnt(maxx - minn + 1, 0);
+//    for (int i = 0; i < cnt.size(); ++i) {
+//        cnt[arr[i] - minn] += 1;
+//        cout << cnt[i] << " ";
+//    }
+//
+//    
+//}
+
+void QuickSort(vector <int>& arr, int l, int r) {
+    int n = arr.size();
+    if (l >= r) return;
+    int p = partition(arr, l, r);
+    QuickSort(arr, l, p);
+    QuickSort(arr, p + 1, r);
+    
+int main()
+{
+    cout << "Enter the length of array: " << endl;
+    int n;
+    cin >> n;
+    vector <int> arr(n);
+    fillTheArray(arr);
+    QuickSort(arr, 0, arr.size() - 1)
+
+    for (int i = 0; i < arr.size(); ++i) {
+        cout << arr[i] << " ";
+    }
+
+}
+
+
+
+
+
+
+
+
+//void sortCount(vector <int>& arr) {
+//
+//    vector <int> cnt(100);
+//    for (int i = 0; i < arr.size(); ++i) {
+//        cnt[arr[i]] += 1;
+//    }
+//    int ind = 0;
+//    for (int i = 0; i < cnt.size(); ++i) {
+//        while (cnt[i] != 0) {
+//            arr[ind] = i;
+//            ind++;
+//            cnt[i]--;
+//        }
+//    }
+//
+//}
