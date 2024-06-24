@@ -1,0 +1,49 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+bool isDivisor(vector<int> &A, int d)
+{
+    for (int i : A){
+        if (i % d != 0){
+            return false;
+        }
+    }
+    return true;
+}
+
+void reduction(vector<int> &A)
+{
+    int div, minn = A[0];
+    for (int i : A){
+        if (i < minn){
+            minn = i;
+        }
+    }
+    for (int i = minn; i > 0; --i){
+        if (isDivisor(A, i)){
+            div = i;
+            break;
+        }
+    }
+    for (int i = 0; i < A.size(); ++i){
+        A[i] /= div;
+    }
+
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> A(n);
+    for (int i = 0; i < n; ++i){
+        cin >> A[i];
+    }
+    reduction(A);
+    for (int i = 0; i < A.size(); ++i){
+        cout << A[i] << " ";
+    }
+    return 0;
+}
