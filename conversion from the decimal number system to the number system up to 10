@@ -1,0 +1,23 @@
+#include <iostream>
+
+using namespace std;
+
+int cnt = 0;
+
+int translation(int a, int p) {
+    if (a < p) {
+        cnt += 1;
+        return a % p;
+    }
+    return (translation(a / p, p)) * 10 * cnt + a % p;
+
+}
+
+int main()
+{
+    int a, p;
+    cin >> p;
+    cin >> a;
+    cout << a << "(10)=" << translation(a, p) << "(" << p << ")";
+    return 0;
+}
