@@ -1,0 +1,110 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <list>
+#include <set>
+#include <map>
+
+using namespace std;
+
+void debugger(set <pair <int, int>>& tx) {
+    cout << endl;
+    for (auto it = tx.begin(); it != tx.end(); ++it) {
+        cout << it->first << " " << it->second << endl;
+    }
+}
+
+bool cmp(pair <int, int> x, pair <int, int> y) {
+    if (x.second != y.second) {
+        return x.second < y.second;
+    }
+    return x.first < y.first;
+}
+
+
+int minn(set <pair <int, int>> tx) {
+    auto it = tx.begin();
+    int chek = it->first;
+    int rez = it->second;
+    while (it != tx.end() && it->first == chek) {
+        rez = min(rez, it->second);
+        it++;
+    }
+    return rez;
+}
+
+int maxx(set <pair <int, int>> tx) {
+    auto it = tx.begin();
+    int chek = it->first;
+    int rez = it->second;
+    while (it != tx.end() && it->first == chek) {
+        rez = max(rez, it->second);
+        it++;
+    }
+    return rez;
+}
+
+
+int main() {
+    int n;
+    cin >> n;
+
+    map <int, pair<int, int>> rpt;
+
+    set <pair <int, int>> tx;
+    for (int i = 0; i < n; ++i) {
+        pair <int, int> txx;
+        // first - ВРЕМЯ, second - координата
+        cin >> txx.second >> txx.first;
+        if (rpt.find(txx.first) != rpt.end()) {
+            rpt[txx.first].first = min(rpt[txx.first].first, txx.second);
+            rpt[txx.first].second = max(rpt[txx.first].first, txx.second);
+        }
+        else {
+            rpt[txx.first].first = txx.second;
+            rpt[txx.first].second = txx.second;
+        }
+        
+        tx.insert(txx);
+    }
+    
+    
+
+    vector <int> dp(n);
+
+    //dp - массив с суммой миинмального пути до апельсина в кокнретную точку
+    
+    
+
+    int suml = 0;
+    int sumr = 0;
+
+    int nowl = 0;
+    int nowr = 0;
+
+    auto del = tx.begin();
+
+    for (auto it = tx.begin(); it != tx.end();) {
+        
+        int go_left = minn(tx);
+        int go_right = maxx(tx);
+
+        suml += abs(go_left - nowl);
+        nowl = go_left;
+
+        sumr += abs(go_right - nowr);
+        nowr = go_right;
+
+        del = it;
+        ++it;
+
+        tx.erase(*del);
+        
+    }
+
+    cout << min(suml, sumr);
+
+    
+    return 0;
+}
