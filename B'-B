@@ -1,0 +1,79 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <list>
+#include <set>
+#include <map>
+
+using namespace std;
+
+bool cmp(pair <int, int> x, pair <int, int> y) {
+    if (x.first != y.first) {
+        return x.first < y.first;
+    }
+    return x.second < y.second;
+}
+
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector <pair <int, int>> tx(n);
+
+    
+    for (int i = 0; i < n; ++i) {
+        pair <int, int> txx;
+        // first - ВРЕМЯ, second - координата
+        cin >> txx.second >> txx.first;
+        tx[i] = txx;
+    }
+
+    sort(tx.begin(), tx.end(), cmp);
+    
+
+    int nowl = 0;
+    int nowr = 0;
+
+    int suml = 0;
+    int sumr = 0;
+
+
+    int prevl = -1;
+    int prevr = -1;
+
+    for (int i = 0; i < n; ++i) {
+        
+        int go_left = tx[i].second;
+        int go_right = tx[i].second;
+        while (i + 1 < n && tx[i].first == tx[i + 1].first) {
+            ++i;
+            go_right = tx[i].second;
+        }
+
+        suml = abs(go_left - nowl) + abs(go_right - go_left);
+        sumr = abs(go_right - nowr) + abs(go_right - go_left);
+
+
+        if (prevl != -1) {
+            suml = min(suml + prevl, suml + prevr + abs(nowl - nowr));
+            sumr = min(sumr + prevr, sumr + prevl + abs(nowl - nowr));
+        } 
+
+        nowl = go_left;
+        nowr = go_right;
+
+        prevl = suml;
+        prevr = sumr;
+        
+    }
+    
+    cout << min(prevl + abs(nowl), prevr + abs(nowr));
+    
+
+    
+    
+
+    return 0;
+}
