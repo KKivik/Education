@@ -49,16 +49,6 @@
     <string>Имя файла</string>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="maxEdit">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>80</y>
-     <width>171</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_2">
    <property name="enabled">
     <bool>true</bool>
@@ -67,8 +57,8 @@
     <rect>
      <x>10</x>
      <y>80</y>
-     <width>73</width>
-     <height>38</height>
+     <width>86</width>
+     <height>32</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -89,8 +79,8 @@
     <rect>
      <x>10</x>
      <y>140</y>
-     <width>71</width>
-     <height>31</height>
+     <width>81</width>
+     <height>32</height>
     </rect>
    </property>
    <property name="text">
@@ -105,32 +95,51 @@
     <rect>
      <x>10</x>
      <y>200</y>
-     <width>61</width>
-     <height>26</height>
+     <width>55</width>
+     <height>32</height>
     </rect>
    </property>
    <property name="text">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Среднее&lt;br/&gt; значение&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="minEdit">
+  <widget class="QLineEdit" name="maxEdit">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>140</y>
-     <width>171</width>
-     <height>31</height>
+     <x>140</x>
+     <y>90</y>
+     <width>113</width>
+     <height>22</height>
     </rect>
    </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
   </widget>
-  <widget class="QTextBrowser" name="avgEdit">
+  <widget class="QLineEdit" name="minEdit">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>200</y>
-     <width>171</width>
-     <height>31</height>
+     <x>140</x>
+     <y>150</y>
+     <width>113</width>
+     <height>22</height>
     </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="avgEdit">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>200</y>
+     <width>113</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
