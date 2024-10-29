@@ -1,0 +1,29 @@
+class NoArgsError(Exception):
+    pass
+
+
+class TupleFormatError(Exception):
+    pass
+
+
+def is_prime(x):
+    for i in range(2, (x // 2) + 1):
+        if x % i == 0:
+            return False
+    return True
+
+
+def people(*args):
+    if len(args) == 0:
+        raise NoArgsError('Arguments are not passed')
+    for i in args:
+        if i[1] == 0:
+            raise ZeroDivisionError("You can't divide by zero")
+        if len(i[0]) % i[1] != 0 or not is_prime(i):
+            raise TupleFormatError("Invalid tuple format")
+        for j in i[0]:
+            if not i[0].isupper():
+                raise TupleFormatError("Invalid tuple format")
+
+
+print(people())
