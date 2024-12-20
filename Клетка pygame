@@ -22,10 +22,21 @@ class Board:
         y = self.top
         for i in self.board:
             for j in i:
+                pygame.draw.rect(screen, pygame.Color('white'), (x, y, self.cell_size, self.cell_size), 1)
+                print(self.get_cell((50,70)))
                 x += self.cell_size
-                pygame.draw.rect(screen, pygame.Color('white'), (x, y, self.cell_size, self.cell_size), 2)
             y += self.cell_size
-            x = self.cell_size
+            x = self.left
+
+    def get_cell(self, mouse_pos): #mouse_pos - кортеж
+        x, y = mouse_pos
+        if x >= self.left and x <= self.left + self.cell_size * len(self.board[0]) and y >= self.top and y <= self.top + self.cell_size * len(self.board[0]):
+            x -= self.left
+            y -= self.top
+            x_r = x // self.cell_size + bool(x % self.cell_size)
+            y_r = y // self.cell_size + bool(y % self.cell_size)
+            print(x_r, y_r)
+
 
 if __name__ == '__main__':
     pygame.init()
@@ -36,7 +47,9 @@ if __name__ == '__main__':
     clock = pygame.time.Clock()
     running = True
 
-    board = Board(5, 7)
+    board = Board(4, 3)
+    # board.set_view(100, 100, 50)
+
     while running:  # главный игровой цикл
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
